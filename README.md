@@ -11,8 +11,8 @@ npm install
 npm run dev
 ```
 
-Create a file called .env
-Copy and paste in .env the .env.example content
+* Create a file called .env
+* Copy and paste in .env the .env.example content
 
 ```bash
 php artisan key:generate
