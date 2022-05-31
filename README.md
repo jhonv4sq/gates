@@ -20,3 +20,9 @@ php artisan key:generate
 ```bash
 php artisan config:cache
 ```
+
+* Create database called gates in mysql
+ 
+```bash
+php artisan migrate:fresh --seed
+```
