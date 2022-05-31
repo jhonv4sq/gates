@@ -4,6 +4,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if(session('alert'))
+            <div class="alert alert-{{ session('alert')['type'] }} alert-dismissible fade show" role="alert">
+                <strong>{{ session('alert')['message'] }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
 
@@ -61,6 +69,26 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="userType" class="col-md-4 col-form-label text-md-end">{{ __('userType') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="userType" class="form-control @error('userType') is-invalid @enderror" name="userType" autofocus>
+
+                                @foreach ($rols as $rol)
+                                    <option value="{{ $rol->id }}">{{ $rol->name }}</option>
+                                @endforeach
+
+                                </select>
+
+                                @error('userType')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -68,6 +96,7 @@
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>

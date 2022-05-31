@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // })->middleware('guest');
 Route::get('/', [LoginController::class, 'index'])->name('auth.login');
+
+Route::get('/auth/register', [RegisterController::class, 'index'])->name('auth.register');
 
 Auth::routes();
 
