@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -74,6 +75,15 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        if(! Gate::allows('same-user', $post))
+        {
+            abort(403);
+        }
+        // if(! Gate::any('only-admin', 'only-editor'))
+        // {
+        //     abort(403);
+        // }
+
         return view('posts.edit', compact('post'));
     }
 
@@ -100,6 +110,12 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+
+        if(! Gate::allows('only-admin'))
+        {
+            abort(403);
+        }
+
         $post->delete();
         return redirect()->route('posts.index');
     }
